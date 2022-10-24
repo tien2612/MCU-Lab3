@@ -1,6 +1,6 @@
-input_processing.c:33:6:button_reading	16	static
-input_processing.c:63:15:is_button_pressed	16	static
-input_processing.c:68:15:is_button_pressed_1s	16	static
-input_processing.c:72:15:is_button_press_haft_a_second	16	static
-input_processing.c:77:6:display7SEG	16	static
-input_processing.c:194:6:fsm_for_input_processing	4	static
+input_processing.c:35:6:button_reading	16	static
+input_processing.c:65:15:is_button_pressed	16	static
+input_processing.c:70:15:is_button_pressed_1s	16	static
+input_processing.c:74:15:is_button_press_haft_a_second	16	static
+input_processing.c:78:6:display7SEG	16	static
+input_processing.c:195:6:fsm_for_input_processing	8	static

@@ -7,6 +7,7 @@
 
 #include "main.h"
 #include "input_processing.h"
+#include "global.h"
 // we aim to work with more than one buttons
 #define N0_OF_BUTTONS 1
 // timer interrupt duration is 10ms , so to pass 1 second ,
@@ -30,15 +31,16 @@ static uint8_t flagForButtonPressHaftASecond[N0_OF_BUTTONS];
 // after the button is pressed more than 1 second .
 static uint16_t counterForButtonPress1s[N0_OF_BUTTONS];
 static uint16_t counterForButtonPressHaftASecond[N0_OF_BUTTONS];
+static uint8_t firstLongPressButton = 1;
 void button_reading (void) {
-	display7SEG(counterForButtonPress1s[0]);
+	//counterForButtonPressHaftASecond[0] %= 50;
 	for (int i = 0; i < N0_OF_BUTTONS; i++) {
 		debounceButtonBuffer2[i] = debounceButtonBuffer1[i];
 		debounceButtonBuffer1[i] = HAL_GPIO_ReadPin(BUTTON1_GPIO_Port , BUTTON1_Pin);
 		if(debounceButtonBuffer1[i] == debounceButtonBuffer2[i])
 			buttonBuffer[i] = debounceButtonBuffer1[i];
 		if(buttonBuffer[i] == BUTTON_IS_PRESSED ) { // if a button is pressed , we start counting
-			if (counterForButtonPressHaftASecond[i] < DURATION_FOR_AUTO_INCREASING_PORTA) {
+			if ((counterForButtonPressHaftASecond[i] < DURATION_FOR_AUTO_INCREASING_PORTA) && !firstLongPressButton) {
 				counterForButtonPressHaftASecond[i]++;
 			} else {
 				counterForButtonPressHaftASecond[i] = 0;
@@ -60,9 +62,9 @@ void button_reading (void) {
 	}
 }
 // Check for button is pressed or not
-unsigned char is_button_pressed ( uint8_t index ) {
+unsigned char is_button_pressed(uint8_t index) {
 	if( index >= N0_OF_BUTTONS ) return 0;
-	return ( buttonBuffer [index] == BUTTON_IS_PRESSED) ;
+	return (buttonBuffer [index] == BUTTON_IS_PRESSED) ;
 }
 // Check for button is pressed more than a second or not
 unsigned char is_button_pressed_1s (unsigned char index ) {
@@ -73,7 +75,6 @@ unsigned char is_button_press_haft_a_second(unsigned char index) {
 	if(index >= N0_OF_BUTTONS) return 0xff ;
 	return (flagForButtonPressHaftASecond[index] == 1) ;
 }
-int PORTA = 0;
 void display7SEG(int num) {
   switch(num) {
 	  case 0 : {
@@ -192,10 +193,10 @@ void display7SEG(int num) {
   }
 }
 void fsm_for_input_processing() {
-	/*
+	//display7SEG(buttonState);
 	switch(buttonState) {
 		case BUTTON_RELEASED:
-			HAL_GPIO_WritePin(GPIOA, GPIO_PIN_7, 0); // turn on led 7
+			firstLongPressButton = 1;
 			if (is_button_pressed(0)) {
 				buttonState = BUTTON_PRESSED;
 				display7SEG(PORTA++);
@@ -203,27 +204,27 @@ void fsm_for_input_processing() {
 			}
 			break;
 		case BUTTON_PRESSED:
+			firstLongPressButton = 1;
 			if (!is_button_pressed(0)) {
 				buttonState = BUTTON_RELEASED;
 			} else {
 				if (is_button_pressed_1s(0)) {
 					buttonState = BUTTON_PRESS_MORE_THAN_1S;
-					if (is_button_pressed_1s(0)) {
-						if (PORTA >= 9) PORTA = 0;
-						display7SEG(PORTA++);
-					}
 				}
 			}
 			break;
 		case BUTTON_PRESS_MORE_THAN_1S:
-			HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_7);
+			firstLongPressButton = 0;
 			if (!is_button_pressed(0)) {
 				buttonState = BUTTON_RELEASED;
+			}
+			if (is_button_press_haft_a_second(0)) {
+				display7SEG(PORTA++);
+				if (PORTA > 9) PORTA = 0;
+				flagForButtonPressHaftASecond[0] = 0;
 			}
 			break;
 		default:
 			break;
 	}
-	*/
 }
-
