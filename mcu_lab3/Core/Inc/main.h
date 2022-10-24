@@ -74,6 +74,18 @@ void Error_Handler(void);
 #define SEG6_GPIO_Port GPIOA
 #define BUTTON1_Pin GPIO_PIN_0
 #define BUTTON1_GPIO_Port GPIOB
+#define BUTTON2_Pin GPIO_PIN_1
+#define BUTTON2_GPIO_Port GPIOB
+#define BUTTON3_Pin GPIO_PIN_2
+#define BUTTON3_GPIO_Port GPIOB
+#define EN0_Pin GPIO_PIN_12
+#define EN0_GPIO_Port GPIOA
+#define EN1_Pin GPIO_PIN_13
+#define EN1_GPIO_Port GPIOA
+#define EN2_Pin GPIO_PIN_14
+#define EN2_GPIO_Port GPIOA
+#define EN3_Pin GPIO_PIN_15
+#define EN3_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
