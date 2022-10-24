@@ -1,0 +1,13 @@
+/*
+ * fsm_for_input_processing.h
+ *
+ *  Created on: Oct 24, 2022
+ *      Author: nguye
+ */
+
+#ifndef INC_FSM_FOR_INPUT_PROCESSING_H_
+#define INC_FSM_FOR_INPUT_PROCESSING_H_
+
+void fsm_for_input_processing(void);
+
+#endif /* INC_FSM_FOR_INPUT_PROCESSING_H_ */
