@@ -1,0 +1,14 @@
+/*
+ * software_timer.h
+ *
+ *  Created on: Oct 25, 2022
+ *      Author: nguye
+ */
+
+#ifndef INC_SOFTWARE_TIMER_H_
+#define INC_SOFTWARE_TIMER_H_
+
+#define DURATION_LED_BLINKING_2HZ	50
+
+
+#endif /* INC_SOFTWARE_TIMER_H_ */
