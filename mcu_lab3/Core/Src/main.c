@@ -24,6 +24,8 @@
 /* USER CODE BEGIN Includes */
 #include "input_processing.h"
 #include "global.h"
+#include "output_display.h"
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,7 +98,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT (&htim2) ;
-  //HAL_UART_Transmit(&huart1, &a[0], sizeof(a), 100);
+  int counter = 0;
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -107,7 +109,8 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  fsm_for_input_processing();
+	  printf("Current Number is: %d\r\n", counter++);
+	  HAL_Delay(1000);
   }
   /* USER CODE END 3 */
 }
