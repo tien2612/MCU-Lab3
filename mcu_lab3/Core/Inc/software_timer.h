@@ -16,6 +16,10 @@ extern int timer4_flag;
 extern int timer5_flag;
 extern int TIMER_CYCLE;
 
+extern int timer0_mode_debounce_flag;
+extern int timer0_mode_debounce_counter;
+
+void set_Timer_mode_debounce(int duration);
 void setTimer1(int duration);
 void setTimer2(int duration);
 void setTimer3(int duration);

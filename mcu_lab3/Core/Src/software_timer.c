@@ -18,6 +18,13 @@ int timer3_counter = 0;
 int timer4_counter = 0;
 int timer5_counter = 0;
 
+int timer0_mode_debounce_flag = 0;
+int timer0_mode_debounce_counter = 0;
+
+void set_Timer_mode_debounce(int duration) {
+	timer0_mode_debounce_counter = duration ;
+	timer0_mode_debounce_flag = 0;
+}
 void setTimer1(int duration) {
 	if (duration != DURATION_LED_BLINKING_2HZ) {
 		duration = DURATION_LED_BLINKING_2HZ;
@@ -83,6 +90,12 @@ void timerRun() {
 		timer5_counter--;
 		if (timer5_counter <= 0) {
 			timer5_flag = 1;
+		}
+	}
+	if (timer0_mode_debounce_counter > 0) {
+		timer0_mode_debounce_counter--;
+		if (timer0_mode_debounce_counter <= 0) {
+			timer0_mode_debounce_flag = 1;
 		}
 	}
 }
