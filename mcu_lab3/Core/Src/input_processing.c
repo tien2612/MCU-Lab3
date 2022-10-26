@@ -8,7 +8,7 @@
 #include "input_processing.h"
 #include "global.h"
 #include "software_timer.h"
-
+#include "led7seg.h"
 enum ButtonState{
 	BUTTON_RELEASED,
 	BUTTON_PRESSED,
@@ -40,15 +40,14 @@ int WhichButtonIsPressed() {
 }
 
 void fsm_for_input_processing() {
-	//display7SEG(buttonState);
 	switch(buttonState) {
 		case BUTTON_RELEASED:
 			if (WhichButtonIsPressed()) {
 				buttonState = BUTTON_PRESSED;
 				switch(WhichButtonIsPressed()) {
 					case button_mode_is_pressed:
-						if (status >= 4) status = 0;
-						else status++;
+						if (status >= 3) status = -1;
+						display7SEG(++status);
 						buttonState = BUTTON_PRESSED;
 						break;
 					case button_add_is_pressed:

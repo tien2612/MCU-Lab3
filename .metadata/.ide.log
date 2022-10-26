@@ -2871,3 +2871,11 @@
 2022-10-26 16:07:56,889 [INFO] OpenFileManager:333 - Restore cursor
 2022-10-26 16:08:06,348 [INFO] DmaTabbedPanel:198 - Cannot restore the selected Tab for DMA
 2022-10-26 16:08:29,395 [INFO] DmaTabbedPanel:198 - Cannot restore the selected Tab for DMA
+2022-10-26 17:00:35,447 [INFO] Activator:177 - 
+
+
+2022-10-26 17:00:35,448 [INFO] Activator:178 - !SESSION log4j initialized
+2022-10-26 17:03:40,041 [INFO] Activator:177 - 
+
+
+2022-10-26 17:03:40,042 [INFO] Activator:178 - !SESSION log4j initialized

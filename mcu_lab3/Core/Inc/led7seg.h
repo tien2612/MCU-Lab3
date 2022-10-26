@@ -11,8 +11,8 @@
 #define ON_7SEG		RESET
 #define OFF_7SEG	SET
 
-void display7SEG(int number);
-void update7SEG(int index, int number);
+void display7SEG(int num);
+//void update7SEG(int index, int number);
 
 
 #endif /* INC_LED7SEG_H_ */
