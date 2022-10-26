@@ -8,13 +8,20 @@
 #ifndef INC_LED7SEG_H_
 #define INC_LED7SEG_H_
 
-#define ON_7SEG		RESET
-#define OFF_7SEG	SET
+#define ON_7SEG			SET
+#define OFF_7SEG		RESET
+#define NUMBERS_LED7	4
 #include "main.h"
 
-void led7SEG_init();
-void display7SEG(int num);
-void update7SEG(int index, uint8_t num);
+//uint8_t led_bu3ffer[4] = {0, 1, 2, 3};
+void update_buffer(void);
+void led7SEG_init(void);
+void led_init(void);
+void display7SEG(int number);
+void update7SEG(int index);
+
+void displayMode();
+void displayREDTIME();
 //void update7SEG(int index, int number);
 
 

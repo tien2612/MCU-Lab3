@@ -8,7 +8,7 @@
 #include "main.h"
 #include "input_processing.h"
 #include "global.h"
-#include "button.h"
+
 //#include "7SEG.h"
 // we aim to work with more than one buttons
 #define N0_OF_BUTTONS 4
@@ -55,6 +55,7 @@ void button_reading(void) {
 		if (debounceButtonBuffer1[i] == debounceButtonBuffer2[i]) {
 			//valid input, can read now
 			buttonBufferPrev[i] = buttonBuffer[i];
+			// chap nhan input
 			buttonBuffer[i] = debounceButtonBuffer1[i];
 			if (buttonBuffer[i] == BUTTON_IS_PRESSED) {
 				//toggle pin to validate

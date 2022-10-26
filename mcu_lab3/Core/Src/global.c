@@ -13,5 +13,6 @@ int red_time = 500;
 int green_time = 300;
 int yellow_time = 200;
 
-int PORTA = 0;
-int status = 0;
+int light_time = RED_TIME / 100;
+int status = 1;
+int index_led = 3;

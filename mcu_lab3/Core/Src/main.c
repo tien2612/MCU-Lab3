@@ -27,6 +27,8 @@
 #include "led7seg.h"
 #include "global.h"
 #include "stdio.h"
+#include "software_timer.h"
+#include "traffic_light_processing.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,13 +101,22 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT (&htim2) ;
-  led7SEG_init();
+  //led7SEG_init();
+  GPIOA->BRR=0xFF;
+  led_init();
+  setTimer1(2);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+	  // display mode
+	  if (timer1_flag == 1) {
+		traffic_light_processing();
+		setTimer1(50);
+	 }
+
 	  fsm_for_input_processing();
 	  if (WhichButtonIsPressed()) {
 		  printf("Current mode is: %d\r\n", status);
