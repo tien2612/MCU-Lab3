@@ -6,6 +6,8 @@
  */
 #include "input_reading.h"
 #include "input_processing.h"
+#include "global.h"
+#include "software_timer.h"
 
 enum ButtonState{
 	BUTTON_RELEASED,
@@ -15,12 +17,48 @@ enum ButtonState{
 
 enum ButtonState buttonState = BUTTON_RELEASED;
 
+//void button_processing(int button) {
+//	switch(button) {
+//	if (is_button_pressed(0)) {
+//			if (status >= 4) status = 0;
+//			else status++;
+//		}
+//
+//		if (is_button_press(1)) {
+//
+//		}
+//	}
+//}
+
+int WhichButtonIsPressed() {
+	if (is_button_pressed(0)) return button_mode_is_pressed;
+	if (is_button_pressed(1)) return button_add_is_pressed;
+	if (is_button_pressed(2)) return button_confirm_is_pressed;
+	if (is_button_pressed(3)) return button_reset_is_pressed;
+
+	return 0; // none of these button is pressed
+}
+
 void fsm_for_input_processing() {
 	//display7SEG(buttonState);
 	switch(buttonState) {
 		case BUTTON_RELEASED:
-			if (is_button_pressed(0)) {
+			if (WhichButtonIsPressed()) {
 				buttonState = BUTTON_PRESSED;
+				switch(WhichButtonIsPressed()) {
+					case button_mode_is_pressed:
+						if (status >= 4) status = 0;
+						else status++;
+						buttonState = BUTTON_PRESSED;
+						break;
+					case button_add_is_pressed:
+						break;
+					case button_confirm_is_pressed:
+						break;
+					case button_reset_is_pressed:
+						break;
+					default: buttonState = BUTTON_RELEASED;
+				}
 			}
 			break;
 		case BUTTON_PRESSED:
@@ -33,10 +71,11 @@ void fsm_for_input_processing() {
 			}
 			break;
 		case BUTTON_PRESS_MORE_THAN_1S:
+			//firstLongPressButton = 0;
 			if (!is_button_pressed(0)) {
 				buttonState = BUTTON_RELEASED;
 			}
-			// todo
+			// TODO
 			break;
 		default:
 			break;

@@ -1,6 +1,11 @@
-21:59:44 **** Incremental Build of configuration Debug for project mcu_lab3 ****
+16:49:11 **** Incremental Build of configuration Debug for project mcu_lab3 ****
 make -j8 all 
-arm-none-eabi-gcc "../Core/Src/main.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/main.d" -MT"Core/Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/main.o"
+arm-none-eabi-gcc "../Core/Src/input_processing.c" -mcpu=cortex-m3 -std=gnu11 -g3 -DDEBUG -DUSE_HAL_DRIVER -DSTM32F103x6 -c -I../Core/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc -I../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy -I../Drivers/CMSIS/Device/ST/STM32F1xx/Include -I../Drivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Core/Src/input_processing.d" -MT"Core/Src/input_processing.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Core/Src/input_processing.o"
+../Core/Src/input_processing.c: In function 'fsm_for_input_processing':
+../Core/Src/input_processing.c:86:2: warning: enumeration value 'BUTTON_PRESSED' not handled in switch [-Wswitch]
+   86 |  switch(buttonState) {
+      |  ^~~~~~
+../Core/Src/input_processing.c:86:2: warning: enumeration value 'BUTTON_PRESS_MORE_THAN_1S' not handled in switch [-Wswitch]
 arm-none-eabi-gcc -o "mcu_lab3.elf" @"objects.list"   -mcpu=cortex-m3 -T"C:\Users\nguye\Documents\GitHub\MCU-Lab3\mcu_lab3\STM32F103C6UX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mcu_lab3.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
 Finished building target: mcu_lab3.elf
  
@@ -9,7 +14,7 @@ arm-none-eabi-objdump -h -S  mcu_lab3.elf  > "mcu_lab3.list"
 arm-none-eabi-objcopy  -O ihex  mcu_lab3.elf  "mcu_lab3.hex"
 arm-none-eabi-objcopy  -O binary  mcu_lab3.elf  "mcu_lab3.bin"
    text	   data	    bss	    dec	    hex	filename
-  13040	    144	   1800	  14984	   3a88	mcu_lab3.elf
+  13208	    144	   1816	  15168	   3b40	mcu_lab3.elf
 Finished building: default.size.stdout
  
 Finished building: mcu_lab3.hex
@@ -19,5 +24,5 @@ Finished building: mcu_lab3.bin
 Finished building: mcu_lab3.list
  
 
-21:59:45 Build Finished. 0 errors, 0 warnings. (took 993ms)
+16:49:11 Build Finished. 0 errors, 2 warnings. (took 736ms)
 
