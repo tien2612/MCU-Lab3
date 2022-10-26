@@ -12,11 +12,12 @@
 #include "input_processing.h"
 #include "input_reading.h"
 #include "software_timer.h"
-
+#include "button.h"
 void HAL_TIM_PeriodElapsedCallback (TIM_HandleTypeDef *htim ) {
 	if (htim->Instance == TIM2) {
 		button_reading();
 		timerRun();
+		getKeyInput();
 	}
 }
 
