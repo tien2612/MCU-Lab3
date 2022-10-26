@@ -38,7 +38,6 @@ int WhichButtonIsPressed() {
 
 	return 0; // none of these button is pressed
 }
-
 void fsm_for_input_processing() {
 	switch(buttonState) {
 		case BUTTON_RELEASED:
@@ -47,7 +46,8 @@ void fsm_for_input_processing() {
 				switch(WhichButtonIsPressed()) {
 					case button_mode_is_pressed:
 						if (status >= 3) status = -1;
-						display7SEG(++status);
+						++status;
+						printf("%d\r\n", status);
 						buttonState = BUTTON_PRESSED;
 						break;
 					case button_add_is_pressed:

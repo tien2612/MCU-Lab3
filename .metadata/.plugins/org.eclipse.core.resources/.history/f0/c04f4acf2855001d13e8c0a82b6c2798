@@ -1,0 +1,21 @@
+/*
+ * led7seg.h
+ *
+ *  Created on: Oct 26, 2022
+ *      Author: nguye
+ */
+
+#ifndef INC_LED7SEG_H_
+#define INC_LED7SEG_H_
+
+#define ON_7SEG		RESET
+#define OFF_7SEG	SET
+#include "main.h"
+static uint8_t segmentNumber[10] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90};
+
+void display7SEG(uint8_t num);
+void update7SEG(int index, uint8_t num);
+//void update7SEG(int index, int number);
+
+
+#endif /* INC_LED7SEG_H_ */

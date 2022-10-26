@@ -99,7 +99,7 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
   HAL_TIM_Base_Start_IT (&htim2) ;
-
+  led7SEG_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -107,8 +107,6 @@ int main(void)
   while (1)
   {
 	  fsm_for_input_processing();
-	  display7SEG(status);
-
 	  if (WhichButtonIsPressed()) {
 		  printf("Current mode is: %d\r\n", status);
 	  }
@@ -250,9 +248,9 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(GPIOA, EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, D4_Pin|D5_Pin|D6_Pin|SEG3_Pin
-                          |SEG4_Pin|SEG5_Pin|SEG6_Pin|D1_Pin
-                          |D2_Pin|D3_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, D3_Pin|D4_Pin|D5_Pin|D6_Pin
+                          |SEG3_Pin|SEG4_Pin|SEG5_Pin|SEG6_Pin
+                          |GPIO_PIN_7|D1_Pin|D2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pins : EN0_Pin EN1_Pin EN2_Pin EN3_Pin */
   GPIO_InitStruct.Pin = EN0_Pin|EN1_Pin|EN2_Pin|EN3_Pin;
@@ -267,12 +265,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : D4_Pin D5_Pin D6_Pin SEG3_Pin
-                           SEG4_Pin SEG5_Pin SEG6_Pin D1_Pin
-                           D2_Pin D3_Pin */
-  GPIO_InitStruct.Pin = D4_Pin|D5_Pin|D6_Pin|SEG3_Pin
-                          |SEG4_Pin|SEG5_Pin|SEG6_Pin|D1_Pin
-                          |D2_Pin|D3_Pin;
+  /*Configure GPIO pins : D3_Pin D4_Pin D5_Pin D6_Pin
+                           SEG3_Pin SEG4_Pin SEG5_Pin SEG6_Pin
+                           PB7 D1_Pin D2_Pin */
+  GPIO_InitStruct.Pin = D3_Pin|D4_Pin|D5_Pin|D6_Pin
+                          |SEG3_Pin|SEG4_Pin|SEG5_Pin|SEG6_Pin
+                          |GPIO_PIN_7|D1_Pin|D2_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -281,7 +279,7 @@ static void MX_GPIO_Init(void)
   /*Configure GPIO pins : MODE_Pin ADD_Pin CONFIRM_Pin RESET_Pin */
   GPIO_InitStruct.Pin = MODE_Pin|ADD_Pin|CONFIRM_Pin|RESET_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
 }
