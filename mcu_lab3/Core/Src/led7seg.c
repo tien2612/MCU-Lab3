@@ -9,29 +9,27 @@
 #include "global.h"
 static uint8_t led7seg[10] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90};
 static uint8_t led_buffer[4] = {0};
-
+//static uint8_t man_led_buffer[3] = {0};
 void update_buffer() {
-	if (status > 10) {
-		led_buffer[0] = status / 10;
-		led_buffer[1] = status % 10;
-	} else {
+	if (status > 12) return;
+	else {
 		led_buffer[0] = 0;
 		led_buffer[1] = status;
 	}
 
-	if (light_time > 10) {
+	if (light_time >= 10) {
 		led_buffer[2] = light_time / 10;
 		led_buffer[3] = light_time % 10;
 	} else {
 		led_buffer[2] = 0;
 		led_buffer[3] = light_time;
 	}
-
 }
 
 void led_init() {
 	GPIOB->BSRR = 0xFF00;
 }
+
 void update7SEG(int index){
 	switch(index) {
 		case 0:

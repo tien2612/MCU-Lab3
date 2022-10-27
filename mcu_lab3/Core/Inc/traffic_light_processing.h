@@ -9,5 +9,6 @@
 #define INC_TRAFFIC_LIGHT_PROCESSING_H_
 
 void traffic_light_processing(void);
-
+void updateTempTime(void);
+void confirmAdjustedTime(void);
 #endif /* INC_TRAFFIC_LIGHT_PROCESSING_H_ */

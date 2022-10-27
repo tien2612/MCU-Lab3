@@ -1,2 +1,2 @@
-input_processing.c:20:5:WhichButtonIsPressed	8	static
-input_processing.c:28:6:fsm_for_input_processing	8	static
+input_processing.c:21:5:WhichButtonIsPressed	8	static
+input_processing.c:29:6:fsm_for_input_processing	8	static
