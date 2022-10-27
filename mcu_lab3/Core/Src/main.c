@@ -112,6 +112,7 @@ int main(void)
   while (1)
   {
 	  // display mode
+//
 	  if (timer1_flag == 1) {
 		 traffic_light_processing();
 		 setTimer1(50);
@@ -119,7 +120,8 @@ int main(void)
 
 	  fsm_for_input_processing();
 	  if (WhichButtonIsPressed()) {
-		  printf("Current mode is: %d\r\n", status);
+		  printf("Time temp: %d\r\n", temp_value);
+		  printf("Light time: %d\r\n", light_time);
 	  }
     /* USER CODE END WHILE */
 
