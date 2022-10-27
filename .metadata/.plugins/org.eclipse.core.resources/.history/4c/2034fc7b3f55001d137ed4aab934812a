@@ -1,0 +1,21 @@
+/*
+ * traffic_light_processing.c
+ *
+ *  Created on: Oct 26, 2022
+ *      Author: nguye
+ */
+
+#include "main.h"
+#include "traffic_light_processing.h"
+#include "input_reading.h"
+#include "input_processing.h"
+#include "global.h"
+
+void traffic_light_processing() {
+	switch(status) {
+	case MODE:
+
+		break;
+	case ADD:
+	}
+}

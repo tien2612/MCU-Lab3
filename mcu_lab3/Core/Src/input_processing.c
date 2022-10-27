@@ -17,19 +17,6 @@ enum ButtonState{
 
 enum ButtonState buttonState = BUTTON_RELEASED;
 
-//void button_processing(int button) {
-//	switch(button) {
-//	if (is_button_pressed(0)) {
-//			if (status >= 4) status = 0;
-//			else status++;
-//		}
-//
-//		if (is_button_press(1)) {
-//
-//		}
-//	}
-//}
-
 int WhichButtonIsPressed() {
 	if (is_button_pressed(0)) return button_mode_is_pressed;
 	if (is_button_pressed(1)) return button_add_is_pressed;
@@ -45,9 +32,21 @@ void fsm_for_input_processing() {
 				buttonState = BUTTON_PRESSED;
 				switch(WhichButtonIsPressed()) {
 					case button_mode_is_pressed:
-						if (status >= 3) status = -1;
-						++status;
-						printf("%d\r\n", status);
+						switch(status) {
+							case NORMAL_MODE:
+								status = RED_MODE;
+								break;
+							case RED_MODE:
+								status = AMBER_MODE;
+								break;
+							case AMBER_MODE:
+								status = GREEN_MODE;
+								break;
+							case GREEN_MODE:
+								status = NORMAL_MODE;
+							default:
+								break;
+						}
 						buttonState = BUTTON_PRESSED;
 						break;
 					case button_add_is_pressed:

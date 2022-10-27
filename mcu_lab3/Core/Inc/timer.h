@@ -10,3 +10,4 @@
 
 
 #endif /* INC_TIMER_H_ */
+extern int index;

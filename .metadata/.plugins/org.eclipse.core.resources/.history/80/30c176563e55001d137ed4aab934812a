@@ -1,0 +1,11 @@
+/*
+ * traffic_light_processing.c
+ *
+ *  Created on: Oct 26, 2022
+ *      Author: nguye
+ */
+
+
+#include "traffic_light_processing.h"
+#include "input_reading.h"
+#include "global.h"

@@ -26,9 +26,9 @@ void set_Timer_mode_debounce(int duration) {
 	timer0_mode_debounce_flag = 0;
 }
 void setTimer1(int duration) {
-	if (duration != DURATION_LED_BLINKING_2HZ) {
-		duration = DURATION_LED_BLINKING_2HZ;
-	}
+//	if (duration != DURATION_LED_BLINKING_2HZ) {
+//		duration = DURATION_LED_BLINKING_2HZ;
+//	}
 	timer1_counter = duration ;
 	timer1_flag = 0;
 }

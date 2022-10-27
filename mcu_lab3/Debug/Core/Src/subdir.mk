@@ -5,7 +5,6 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Core/Src/button.c \
 ../Core/Src/global.c \
 ../Core/Src/input_processing.c \
 ../Core/Src/input_reading.c \
@@ -18,10 +17,10 @@ C_SRCS += \
 ../Core/Src/syscalls.c \
 ../Core/Src/sysmem.c \
 ../Core/Src/system_stm32f1xx.c \
-../Core/Src/timer.c 
+../Core/Src/timer.c \
+../Core/Src/traffic_light_processing.c 
 
 OBJS += \
-./Core/Src/button.o \
 ./Core/Src/global.o \
 ./Core/Src/input_processing.o \
 ./Core/Src/input_reading.o \
@@ -34,10 +33,10 @@ OBJS += \
 ./Core/Src/syscalls.o \
 ./Core/Src/sysmem.o \
 ./Core/Src/system_stm32f1xx.o \
-./Core/Src/timer.o 
+./Core/Src/timer.o \
+./Core/Src/traffic_light_processing.o 
 
 C_DEPS += \
-./Core/Src/button.d \
 ./Core/Src/global.d \
 ./Core/Src/input_processing.d \
 ./Core/Src/input_reading.d \
@@ -50,7 +49,8 @@ C_DEPS += \
 ./Core/Src/syscalls.d \
 ./Core/Src/sysmem.d \
 ./Core/Src/system_stm32f1xx.d \
-./Core/Src/timer.d 
+./Core/Src/timer.d \
+./Core/Src/traffic_light_processing.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
