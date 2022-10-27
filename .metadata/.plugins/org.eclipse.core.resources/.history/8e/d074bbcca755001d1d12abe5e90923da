@@ -113,8 +113,8 @@ int main(void)
   {
 	  // display mode
 	  if (timer1_flag == 1) {
-		 traffic_light_processing();
-		 setTimer1(50);
+		traffic_light_processing();
+		setTimer1(50);
 	 }
 
 	  fsm_for_input_processing();

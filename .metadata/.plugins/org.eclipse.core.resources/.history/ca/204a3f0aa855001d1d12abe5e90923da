@@ -113,7 +113,7 @@ int main(void)
   {
 	  // display mode
 	  if (timer1_flag == 1) {
-		 traffic_light_processing();
+		 traffic_light_processing
 		 setTimer1(50);
 	 }
 

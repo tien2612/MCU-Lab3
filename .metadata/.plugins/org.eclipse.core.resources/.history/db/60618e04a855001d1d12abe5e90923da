@@ -113,8 +113,9 @@ int main(void)
   {
 	  // display mode
 	  if (timer1_flag == 1) {
-		 traffic_light_processing();
-		 setTimer1(50);
+		HAL_GPIO_TogglePin(GPIOB, D4_Pin);
+		HAL_GPIO_TogglePin(GPIOB, D1_Pin);
+		setTimer1(50);
 	 }
 
 	  fsm_for_input_processing();

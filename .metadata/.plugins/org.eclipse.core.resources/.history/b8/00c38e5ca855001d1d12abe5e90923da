@@ -17,16 +17,22 @@ void traffic_light_processing() {
 
 			break;
 		case RED_MODE:
-			HAL_GPIO_WritePin(GPIOB, D3_Pin | D6_Pin, 1); // turn off GREEN LED
-			HAL_GPIO_TogglePin(GPIOB, D4_Pin | D1_Pin);
+			led_init();
+			HAL_GPIO_TogglePin(GPIOB, D4_Pin);
+			HAL_GPIO_TogglePin(GPIOB, D1_Pin);
+
 			break;
 		case AMBER_MODE:
-			HAL_GPIO_WritePin(GPIOB, D1_Pin | D4_Pin, 1); // turn off RED LED
-			HAL_GPIO_TogglePin(GPIOB, D2_Pin | D5_Pin);
+			led_init();
+			HAL_GPIO_TogglePin(GPIOB, D2_Pin);
+			HAL_GPIO_TogglePin(GPIOB, D5_Pin);
+
 			break;
 		case GREEN_MODE:
-			HAL_GPIO_WritePin(GPIOB, D1_Pin | D2_Pin | D4_Pin | D5_Pin, 1); // turn off AMBER LED
-			HAL_GPIO_TogglePin(GPIOB, D3_Pin | D6_Pin);
+			led_init();
+			HAL_GPIO_TogglePin(GPIOB, D3_Pin);
+			HAL_GPIO_TogglePin(GPIOB, D6_Pin);
+
 			break;
 	}
 }
