@@ -18,31 +18,23 @@ int timer3_counter = 0;
 int timer4_counter = 0;
 int timer5_counter = 0;
 
-int timer0_mode_debounce_flag = 0;
-int timer0_mode_debounce_counter = 0;
+int tick = 50;
 
-void set_Timer_mode_debounce(int duration) {
-	timer0_mode_debounce_counter = duration ;
-	timer0_mode_debounce_flag = 0;
-}
 void setTimer1(int duration) {
-//	if (duration != DURATION_LED_BLINKING_2HZ) {
-//		duration = DURATION_LED_BLINKING_2HZ;
+//	if (duration != tick) {
+//		duration = tick;
 //	}
 	timer1_counter = duration ;
 	timer1_flag = 0;
 }
 void setTimer2(int duration) {
-	if (duration != DURATION_LED_BLINKING_2HZ) {
-		duration = DURATION_LED_BLINKING_2HZ;
-	}
+//	if (duration != DURATION_LED_BLINKING_2HZ) {
+//		duration = DURATION_LED_BLINKING_2HZ;
+//	}
 	timer2_counter = duration;
 	timer2_flag = 0;
 }
 void setTimer3(int duration) {
-	if (duration != DURATION_LED_BLINKING_2HZ) {
-		duration = DURATION_LED_BLINKING_2HZ;
-	}
 	timer3_counter = duration;
 	timer3_flag = 0;
 }
@@ -61,6 +53,7 @@ void setTimer5(int duration) {
 	timer5_counter = duration;
 	timer5_flag = 0;
 }
+
 void timerRun() {
 	if (timer1_counter > 0) {
 		timer1_counter--;
@@ -90,12 +83,6 @@ void timerRun() {
 		timer5_counter--;
 		if (timer5_counter <= 0) {
 			timer5_flag = 1;
-		}
-	}
-	if (timer0_mode_debounce_counter > 0) {
-		timer0_mode_debounce_counter--;
-		if (timer0_mode_debounce_counter <= 0) {
-			timer0_mode_debounce_flag = 1;
 		}
 	}
 }

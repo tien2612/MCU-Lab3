@@ -24,46 +24,46 @@ int WhichButtonIsPressed() {
 	if (is_button_pressed(2)) return button_confirm_is_pressed;
 	if (is_button_pressed(3)) return button_reset_is_pressed;
 
-	return 0; // none of these button is pressed
+	return 0; // None of these buttons are pressed
 }
 void fsm_for_input_processing() {
+	if (status != NORMAL_MODE) light_time1 = status;
 	switch(buttonState) {
 		case BUTTON_RELEASED:
 			if (WhichButtonIsPressed()) {
 				buttonState = BUTTON_PRESSED;
+				//normal_running_traffic_light();
 				switch(WhichButtonIsPressed()) {
 					// NORMAL MODE
 					case button_mode_is_pressed:
 						switch(status) {
+							// NORMAL MODE - Automatic Running
 							case NORMAL_MODE:
 								status = RED_MODE;
-								//light_time = man_red_time;
+								light_time = man_red_time;
+								temp_value = light_time;
 								break;
 							// RED && MAN_RED MODE
-							case RED_MODE:
+							case RED_MODE: case MAN_RED_MODE:
 								// restore light_time if is not pressed button confirm
 								light_time = man_amber_time;
 								temp_value = light_time; // store value to temp variable if button add is pressed
 								status = AMBER_MODE;
 								break;
-							case MAN_RED_MODE:
-								status = AMBER_MODE;
 							// AMBER && MAN_AMBER MODE
-							case AMBER_MODE:
+							case AMBER_MODE: case MAN_AMBER_MODE:
 								// restore light_time if is not pressed button confirm
 								light_time = man_green_time;
 								temp_value = light_time; // store value to temp variable if button add is pressed
 								status = GREEN_MODE;
 								break;
-							case MAN_AMBER_MODE:
-								status = GREEN_MODE;
 							// GREEN && MAN_GREEN MODE
-							case GREEN_MODE:
+							case GREEN_MODE: case MAN_GREEN_MODE:
 								// restore light_time if is not pressed button confirm
+								light_time = man_red_time;
 								temp_value = light_time; // store value to temp variable if button add is pressed
 								status = NORMAL_MODE;
-							case MAN_GREEN_MODE:
-								status = NORMAL_MODE;
+							// CONFIRM STATE
 							case CONFIRM_STATE:
 								status = NORMAL_MODE;
 							default:
@@ -71,7 +71,7 @@ void fsm_for_input_processing() {
 						}
 						buttonState = BUTTON_PRESSED;
 						break;
-					// ADD MODE
+					// ADD BUTTON
 					case button_add_is_pressed:
 						// Increasing time depending on current state
 						switch(status) {
@@ -87,14 +87,18 @@ void fsm_for_input_processing() {
 						default:
 							break;
 						}
+						// If the button add is pressed then temp_value++. Finally update light_time = temp_value,
 						updateTempTime();
 						break;
+					// CONFIRM BUTTON
 					case button_confirm_is_pressed:
+						// If the button confirm is pressed, then man_red/yellow/green_time = temp_value was stored before
 						confirmAdjustedTime();
 						break;
 					case button_reset_is_pressed:
 						break;
-					default: buttonState = BUTTON_RELEASED;
+					default:
+						break;
 				}
 			}
 			break;

@@ -19,7 +19,7 @@ void led7SEG_init(void);
 void led_init(void);
 void display7SEG(int number);
 void update7SEG(int index);
-
+void led_clear(void);
 void displayMode();
 void displayREDTIME();
 //void update7SEG(int index, int number);

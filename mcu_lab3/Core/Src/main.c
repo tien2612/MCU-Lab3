@@ -105,6 +105,8 @@ int main(void)
   GPIOA->BRR=0xFF;
   led_init();
   setTimer1(2);
+  setTimer2(3);
+  setTimer3(100);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -112,17 +114,15 @@ int main(void)
   while (1)
   {
 	  // display mode
-//
 	  if (timer1_flag == 1) {
-		 traffic_light_processing();
-		 setTimer1(50);
-	 }
-
-	  fsm_for_input_processing();
-	  if (WhichButtonIsPressed()) {
-		  printf("Time temp: %d\r\n", temp_value);
-		  printf("Light time: %d\r\n", light_time);
+		  traffic_light_processing();
+		  setTimer1(50);
 	  }
+	  fsm_for_input_processing();
+	  //if (light_t)
+//	  if (time3_flag == 1) {
+//
+//	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -10,5 +10,6 @@
 
 void button_processing(void);
 void fsm_for_input_processing(void);
+void normal_running_traffic_light(void);
 int WhichButtonIsPressed();
 #endif /* INC_INPUT_PROCESSING_H_ */
