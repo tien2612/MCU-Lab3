@@ -26,5 +26,5 @@ void setTimer3(int duration);
 void setTimer4(int duration);
 void setTimer5(int duration);
 void timerRun();
-
+void clearTimer1();
 #endif /* INC_SOFTWARE_TIMER_H_ */

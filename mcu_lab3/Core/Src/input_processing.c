@@ -39,12 +39,14 @@ void fsm_for_input_processing() {
 						switch(status) {
 							// NORMAL MODE - Automatic Running
 							case NORMAL_MODE:
+								led_init();
 								status = RED_MODE;
 								light_time = man_red_time;
 								temp_value = light_time;
 								break;
 							// RED && MAN_RED MODE
 							case RED_MODE: case MAN_RED_MODE:
+								GPIOB->BSRR = 0x3F00;
 								// restore light_time if is not pressed button confirm
 								light_time = man_amber_time;
 								temp_value = light_time; // store value to temp variable if button add is pressed
@@ -52,6 +54,7 @@ void fsm_for_input_processing() {
 								break;
 							// AMBER && MAN_AMBER MODE
 							case AMBER_MODE: case MAN_AMBER_MODE:
+								GPIOB->BSRR = 0x3F00;
 								// restore light_time if is not pressed button confirm
 								light_time = man_green_time;
 								temp_value = light_time; // store value to temp variable if button add is pressed
@@ -59,6 +62,7 @@ void fsm_for_input_processing() {
 								break;
 							// GREEN && MAN_GREEN MODE
 							case GREEN_MODE: case MAN_GREEN_MODE:
+								GPIOB->BSRR = 0x3F00;
 								// restore light_time if is not pressed button confirm
 								light_time = man_red_time;
 								temp_value = light_time; // store value to temp variable if button add is pressed
@@ -100,8 +104,8 @@ void fsm_for_input_processing() {
 					default:
 						break;
 				}
+				break;
 			}
-			break;
 		case BUTTON_PRESSED:
 			if (!WhichButtonIsPressed()) {
 				buttonState = BUTTON_RELEASED;

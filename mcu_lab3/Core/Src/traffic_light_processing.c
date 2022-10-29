@@ -6,8 +6,8 @@
  */
 
 #include "main.h"
+#include "stdio.h"
 #include "traffic_light_processing.h"
-#include "input_reading.h"
 #include "input_processing.h"
 #include "global.h"
 #include "led7seg.h"
@@ -37,6 +37,7 @@ void updateTempTime() {
 }
 
 void confirmAdjustedTime() {
+	printf("Confirmed adjust time!\r\n");
 	switch(status) {
 		case NORMAL_MODE:
 			//temp_value = light_time;
@@ -56,67 +57,76 @@ void confirmAdjustedTime() {
 		default:
 			break;
 	}
+	traffic_init();
 }
 
 void normal_running_traffic_light() {
 	switch(led_status) {
-		case INIT_TRAFFIC_LIGHT:
-				//led_clear();
-				HAL_GPIO_WritePin(GPIOA, D1_Pin, 0); // On ROAD 1, turn on the RED light. 
-				HAL_GPIO_WritePin(GPIOA, D6_Pin, 0); // On ROAD 2, turn on the GREEN light. 
-
-				light_time = man_green_time; // Road 2
-				light_time1 = man_red_time; // Road 1
-				led_status = RED_GREEN;
-				setTimer2(300);
-			break;
 		case RED_GREEN:
-				if (timer1_flag == 1) {
-					//led_clear();
-					HAL_GPIO_WritePin(GPIOA, D1_Pin, 0); // On ROAD 1, turn on the RED light. 
-					HAL_GPIO_WritePin(GPIOA, D5_Pin, 0); // On ROAD 2, turn on the AMBER light. 
+			if (timer3_flag == 1) {
+				led_init();
+				HAL_GPIO_WritePin(GPIOB, D1_Pin, 0); // On ROAD 1, turn on the RED light. 
+				HAL_GPIO_WritePin(GPIOB, D6_Pin, 0); // On ROAD 2, turn on the GREEN light. 
 
-					light_time = man_amber_time; // Road 2
-					light_time1 = man_red_time; // Road 1
+				light_time--;
+				light_time1--;
+				if (light_time == 0 || light_time1 == 0) {
 					led_status = RED_AMBER;
-					setTimer2(200);
+					light_time = man_amber_time; // Road 2
+					led_init();
+					//light_time1 = man_red_time; // Road 1
+					HAL_GPIO_WritePin(GPIOB, D1_Pin, 0); // On ROAD 1, turn on the RED light. 
+					HAL_GPIO_WritePin(GPIOB, D5_Pin, 0); // On ROAD 2, turn on the AMBER light. 
 				}
+				setTimer3(100);
+			}
 			break;
 		case RED_AMBER:
-			if (timer1_flag == 1) {
-				//led_clear();
-				HAL_GPIO_WritePin(GPIOA, D4_Pin, 0); // On ROAD 1, turn on the RED light. 
-				HAL_GPIO_WritePin(GPIOA, D3_Pin, 0); // On ROAD 2, turn on the GREEN light. 
+				if (timer3_flag == 1) {
+					light_time--;
+					light_time1--;
+					if (!light_time || !light_time1) {
+						led_status = GREEN_RED;
+						light_time = man_red_time; // Road 2
+						light_time1 = man_green_time; // Road 1
 
-				light_time = man_red_time; // Road 2
-				light_time1 = man_green_time; // Road 1
-				led_status = RED_AMBER;
-				setTimer2(300);
-			}
+						led_init();
+						HAL_GPIO_WritePin(GPIOB, D4_Pin, 0); // On ROAD 1, turn on the RED light. 
+						HAL_GPIO_WritePin(GPIOB, D3_Pin, 0); // On ROAD 2, turn on the GREEN light. 
+					}
+					setTimer3(100);
+				}
+
 			break;
 		case GREEN_RED:
-			if (timer1_flag == 1) {
-				//led_clear();
-				HAL_GPIO_WritePin(GPIOA, D2_Pin, 0); // On ROAD 1, turn on the RED light. 
-				HAL_GPIO_WritePin(GPIOA, D4_Pin, 0); // On ROAD 2, turn on the GREEN light. 
+			if (timer3_flag == 1) {
 
-				light_time = man_red_time; // Road 2
-				light_time1 = man_amber_time; // Road 1
-				led_status = RED_AMBER;
-				setTimer2(200);
+				light_time--;
+				light_time1--;
+				if (!light_time || !light_time1) {
+					led_status = AMBER_RED;
+					light_time1 = man_amber_time; // Road 1
+					led_init();
+					HAL_GPIO_WritePin(GPIOB, D2_Pin, 0); // On ROAD 1, turn on the RED light. 
+					HAL_GPIO_WritePin(GPIOB, D4_Pin, 0); // On ROAD 2, turn on the GREEN light. 
+				}
+				setTimer3(100);
 			}
+
 			break;
 		case AMBER_RED:
-			if (timer1_flag == 1) {
-				//led_clear();
-				HAL_GPIO_WritePin(GPIOA, D1_Pin, 0); // On ROAD 1, turn on the RED light. 
-				HAL_GPIO_WritePin(GPIOA, D6_Pin, 0); // On ROAD 2, turn on the GREEN light. 
-
-				light_time = man_green_time; // Road 2
-				light_time1 = man_red_time; // Road 1
-
-				led_status = RED_AMBER;
-				setTimer2(300);
+			if (timer3_flag == 1) {
+				light_time--;
+					light_time1--;
+				if (!light_time || !light_time1) {
+					led_status = RED_GREEN;
+					light_time = man_green_time; // Road 2
+					light_time1 = man_red_time; // Road 1
+					led_init();
+					HAL_GPIO_WritePin(GPIOB, D1_Pin, 0); // On ROAD 1, turn on the RED light. 
+					HAL_GPIO_WritePin(GPIOB, D6_Pin, 0); // On ROAD 2, turn on the GREEN light. 
+				}
+				setTimer3(100);
 			}
 			break;
 		default:
@@ -127,30 +137,28 @@ void normal_running_traffic_light() {
 void traffic_light_processing() {
 	switch(status) {
 		case NORMAL_MODE:
-//			normal_running_traffic_light();
-//			if (timer3_flag == 1) {
-//				light_time--;
-//				light_time1--;
-//				setTimer3(100);
-//			}
+			normal_running_traffic_light();
 			break;
 		case RED_MODE: case MAN_RED_MODE:
-				// Turn off GREEN AND AMBER LED
-				HAL_GPIO_WritePin(GPIOB, D3_Pin | D6_Pin | D2_Pin | D5_Pin, 1);
+			if (timer1_flag == 1) {
 				// Toggle RED
 				HAL_GPIO_TogglePin(GPIOB, D4_Pin | D1_Pin);
+				setTimer1(50);
+			}
 			break;
 		case AMBER_MODE: case MAN_AMBER_MODE:
-			// Turn off RED AND GREEN LED
-			HAL_GPIO_WritePin(GPIOB, D1_Pin | D4_Pin | D3_Pin | D6_Pin, 1);
-			// Toggle AMBER
-			HAL_GPIO_TogglePin(GPIOB, D2_Pin | D5_Pin);
+			if (timer1_flag == 1) {
+				// Toggle AMBER
+				HAL_GPIO_TogglePin(GPIOB, D2_Pin | D5_Pin);
+				setTimer1(50);
+			}
 			break;
 		case GREEN_MODE: case MAN_GREEN_MODE:
-			// turn off RED AND AMBER LED
-			HAL_GPIO_WritePin(GPIOB, D1_Pin | D2_Pin | D4_Pin | D5_Pin, 1);
-			// Toggle GREEN
-			HAL_GPIO_TogglePin(GPIOB, D3_Pin | D6_Pin);
+			if (timer1_flag == 1) {
+				// Toggle GREEN
+				HAL_GPIO_TogglePin(GPIOB, D3_Pin | D6_Pin);
+				setTimer1(50);
+			}
 			break;
 	}
 }

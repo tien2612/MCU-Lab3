@@ -86,3 +86,8 @@ void timerRun() {
 		}
 	}
 }
+
+void clearTimer1() {
+	timer1_counter = 0;
+	timer1_flag = 0;
+}
