@@ -2,7 +2,7 @@
 #### Microcontroller Unit using STM32 - Lab 3
 Topic: Buttons-Switches
 
-*** Introduction ***
+#### Introduction
 The project is to build an application for a traffic light at a crossroads which includes
 some features that can modify the timer and display in the LED 7-segment.
 #### There are four buttons that are used for impletement.***
