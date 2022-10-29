@@ -20,3 +20,6 @@ int light_time1 = RED_TIME / 100;
 int status = NORMAL_MODE;
 int led_status = RED_GREEN;
 int index_led = 0;
+int AllowToExecuteAfterASecondPressed = 0;
+
+int flagForButtonPressOneQuarterSecond[4] = {0};
