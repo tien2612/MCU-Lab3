@@ -8,7 +8,7 @@ Topic: Buttons-Switches
 The project is to build an application for a traffic light at a crossroads which includes
 some features that can modify the timer and display in the LED 7-segment.
 ```
-#### There are four buttons that are used for impletement.***
+#### There are four buttons that are used for impletement
 * Button to select MODE.
 * Button to increase the value of the LED.
 * Button to confirm these values.
