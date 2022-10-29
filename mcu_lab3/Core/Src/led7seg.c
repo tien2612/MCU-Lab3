@@ -30,13 +30,6 @@ void led_init() {
 	GPIOB->BSRR = 0xFF00;
 }
 
-void traffic_init() {
-	light_time = man_green_time;
-	light_time1 = man_red_time;
-	HAL_GPIO_WritePin(GPIOB, D1_Pin, 0); // On ROAD 1, turn on the RED light. 
-	HAL_GPIO_WritePin(GPIOB, D6_Pin, 0); // On ROAD 2, turn on the GREEN light. 
-}
-
 void led_clear() {
 	HAL_GPIO_WritePin(GPIOA, D1_Pin | D2_Pin | D3_Pin | D4_Pin | D5_Pin | D6_Pin, 1);
 }

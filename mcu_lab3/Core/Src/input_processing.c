@@ -27,7 +27,9 @@ int WhichButtonIsPressed() {
 	return 0; // None of these buttons are pressed
 }
 void fsm_for_input_processing() {
-	if (status != NORMAL_MODE) light_time1 = status;
+	// Only display 3 MODE to modify value.
+	if (status == RED_MODE || status == GREEN_MODE || status == AMBER_MODE)
+		light_time1 = status;
 	switch(buttonState) {
 		case BUTTON_RELEASED:
 			if (WhichButtonIsPressed()) {
@@ -43,6 +45,8 @@ void fsm_for_input_processing() {
 								status = RED_MODE;
 								light_time = man_red_time;
 								temp_value = light_time;
+								// Adjust frequency scanning process of single RED LED
+
 								break;
 							// RED && MAN_RED MODE
 							case RED_MODE: case MAN_RED_MODE:
@@ -65,11 +69,15 @@ void fsm_for_input_processing() {
 								GPIOB->BSRR = 0x3F00;
 								// restore light_time if is not pressed button confirm
 								light_time = man_red_time;
-								temp_value = light_time; // store value to temp variable if button add is pressed
+								// assign temp value = light_time and then
+								// if button add is pressed it will increase temp_value;
+								temp_value = light_time;
 								status = NORMAL_MODE;
-							// CONFIRM STATE
-							case CONFIRM_STATE:
-								status = NORMAL_MODE;
+								// re-initialize traffic light
+								traffic_init();
+								// update the new buffer to display it at LED 7 SEG
+								update_buffer();
+								setTimer3(100);
 							default:
 								break;
 						}
