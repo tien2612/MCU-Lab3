@@ -70,12 +70,15 @@ void resetToTheDefaultSetting() {
 	// default settings
 	printf("All settings have been reset!\r\n");
 	printf("The system is in MODE '1 - NORMAL_MODE' \r\n");
-	light_time = GREEN_TIME / 100;
-	light_time1 = RED_TIME / 100;
+	man_red_time = RED_TIME / 100;
+	man_amber_time = YELLOW_TIME / 100;
+	man_green_time = GREEN_TIME / 100;
 	status = NORMAL_MODE;
 	led_status = RED_GREEN;
 	index_led = 0;
 	temp_value = 0;
+	// re-initialize traffic light with default settings
+	traffic_init();
 }
 
 void normal_running_traffic_light() {

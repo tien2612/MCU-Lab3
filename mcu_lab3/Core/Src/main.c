@@ -115,14 +115,8 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  // display mode
-
 	  traffic_light_processing();
 	  fsm_for_input_processing();
-//	  if (WhichButtonIsPressed()) {
-//		  printf("light_time %d\r\n", light_time);
-//		  printf("light_time1 %d\r\n", light_time1);
-//	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

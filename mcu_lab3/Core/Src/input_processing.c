@@ -6,11 +6,11 @@
  */
 #include "input_reading.h"
 #include "input_processing.h"
+#include "stdio.h"
 #include "global.h"
 #include "software_timer.h"
 #include "led7seg.h"
 #include "traffic_light_processing.h"
-#include "stdio.h"
 
 enum ButtonState{
 	BUTTON_RELEASED,
@@ -21,13 +21,14 @@ enum ButtonState{
 enum ButtonState buttonState = BUTTON_RELEASED;
 
 int WhichButtonIsPressed() {
+	if (is_button_pressed(3)) return button_reset_is_pressed;
 	if (is_button_pressed(0)) return button_mode_is_pressed;
 	if (is_button_pressed(1)) return button_add_is_pressed;
 	if (is_button_pressed(2)) return button_confirm_is_pressed;
-	if (is_button_pressed(3)) return button_reset_is_pressed;
 
 	return 0; // None of these buttons are pressed
 }
+
 void fsm_for_input_processing() {
 	// Only display 3 MODE to modify value.
 	if (status == RED_MODE || status == GREEN_MODE || status == AMBER_MODE)
@@ -124,7 +125,7 @@ void fsm_for_input_processing() {
 					default:
 						break;
 				}
-				break;
+				//break;
 			}
 		case BUTTON_PRESSED:
 			if (!WhichButtonIsPressed()) {
