@@ -106,8 +106,9 @@ int main(void)
   led_init();
   traffic_init();
   setTimer1(2);
-  setTimer2(100);
-  setTimer3(100);
+  setTimer2(DURATION_1S);
+  setTimer3(DURATION_1S);
+  printf("The system is in MODE '1 - NORMAL_MODE' \r\n");
   /* USER CODE END 2 */
 
   /* Infinite loop */

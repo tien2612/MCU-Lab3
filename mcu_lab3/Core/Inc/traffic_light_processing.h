@@ -11,5 +11,6 @@
 void traffic_light_processing(void);
 void updateTempTime(void);
 void confirmAdjustedTime(void);
+void resetToTheDefaultSetting();
 void traffic_init(void);
 #endif /* INC_TRAFFIC_LIGHT_PROCESSING_H_ */
