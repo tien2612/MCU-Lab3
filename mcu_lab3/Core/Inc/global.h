@@ -33,10 +33,13 @@
 #define button_reset_is_pressed_1s			17
 
 #define INIT_TRAFFIC_LIGHT					19			// Initital state for traffic light 2-way
-#define RED_GREEN							20			// RED 1 ON - GREEN 2 ON
-#define	RED_AMBER							21			// RED 1 ON - AMBER 2 ON
-#define GREEN_RED							22			// GREEN 1 ON - RED 2 ON
-#define AMBER_RED							23			// AMBER 1 ON - RED 2 ON
+
+#define RED_ROAD1							20			// RED ROAD 1 TURN
+#define	GREEN_ROAD1							21			// GREEN ROAD 1 TURN
+#define AMBER_ROAD1							22			// AMBER ROAD 1 TURN
+#define RED_ROAD2							23			// RED ROAD 2 TURN
+#define	GREEN_ROAD2							24			// GREEN ROAD 2 TURN
+#define AMBER_ROAD2							25			// AMBER ROAD 2 TURN
 
 
 extern int man_red_time;
@@ -44,7 +47,8 @@ extern int man_green_time;
 extern int man_amber_time;
 extern int temp_value;
 
-extern int led_status;
+extern int led_status1;
+extern int led_status2;
 extern int light_time;
 extern int light_time1;
 extern int status;	// 4 modes of traffic light such as: mode MODE, ADD, CONFIRM and RESET
