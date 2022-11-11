@@ -84,11 +84,7 @@ void fsm_mode_running() {
 					traffic_init();
 					// update the new buffer to display it at LED 7 SEG
 					update_buffer();
-					if (man_red_time != man_green_time + man_amber_time) {
-						printf("The setting is incorrect.\r\n");
-						printf("You should choose red = green + amber (time).\r\n");
-						resetToTheDefaultSetting();
-					}
+
 					setTimer3(DURATION_1S);
 				default:
 					break;
@@ -176,11 +172,7 @@ void fsm_mode_running_for_pressed_1s() {
 					traffic_init();
 					// update the new buffer to display it at LED 7 SEG
 					update_buffer();
-					if (man_red_time != man_green_time + man_amber_time) {
-						printf("The setting is incorrect.\r\n");
-						printf("You should choose red = green + amber (time).\r\n");
-						resetToTheDefaultSetting();
-					}
+
 					setTimer3(DURATION_1S);
 				default:
 					break;

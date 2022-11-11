@@ -109,6 +109,8 @@ int main(void)
   setTimer1(2);
   setTimer2(DURATION_1S);
   setTimer3(DURATION_1S);
+  setTimer4(DURATION_1S);
+  setTimer5(250);
   printf("The system is in MODE '1 - NORMAL_MODE' \r\n");
   /* USER CODE END 2 */
 
@@ -118,6 +120,12 @@ int main(void)
   {
 	  traffic_light_processing();
 	  fsm_for_input_processing();
+
+//	  if (timer5_flag == 1) {
+//		  displayMode();
+//		  setTimer5(250);
+//	  }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
